@@ -1,3 +1,4 @@
+import 'package:app/camera_page.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
@@ -28,7 +29,13 @@ class _CameraFlowState extends State<CameraFlow> {
               shouldShowCamera: () => _toggleCameraOpen(true))),
 
       // Show Camera Page
-      if (_shouldShowCamera) MaterialPage(child: Placeholder())
+      if (_shouldShowCamera)
+        MaterialPage(
+            child: CameraPage(
+                camera: _camera,
+                didProvideImagePath: (imagePath) {
+                  this._toggleCameraOpen(false);
+                }))
     ];
   }
 
